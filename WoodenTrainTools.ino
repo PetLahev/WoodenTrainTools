@@ -1,70 +1,97 @@
+/*
+---->>>>>>  A learning project
 
-#include <AsyncDelay.h>
-void setup() {
+Should provide certain tools for wooden trains
+March 2017 - Added railroads lights functionality without delay (after experimenting with lots of available timer libraries)
 
-	Serial.begin(9600);
-	Serial.println("Setup pins");
-	pinMode(A4, OUTPUT);
-	pinMode(A5, OUTPUT);
-	pinMode(A0, INPUT);
-}
+*/
 
-unsigned long duration;
-bool state;
-void trafficLamp()
+int irSensor1 = A0;
+const int IR1_THRESHOLD = 150;
+
+//  ------ RailRoad settings ------
+const int RAILROAD_DURATION = 10000; // 10 sec
+const int LIGHTS_INTERVAL = 500; // 0.5 sec
+unsigned long railRoadDuration;
+int railRoadLED1 = A4;
+int railRoadLED2 = A5;
+bool areLightsOn;
+//  ------ RailRoad settings ------
+
+void setup()
 {
-	if (duration == 0)
-	{
-		Serial.println("Initialization");
-		Serial.print("State: ");
-		Serial.println(state);
-		duration = millis();
-	}
+	Serial.begin(9600);	
+	pinMode(railRoadLED1, OUTPUT); 
+	pinMode(railRoadLED2, OUTPUT); 
+	pinMode(irSensor1, INPUT);		
+}
 
-	unsigned d = millis() - duration;
-	Serial.print("Duration: ");
-	Serial.println(d);
-	if (d >= 500)
-	{
-		Serial.println("Blinking: ");
-		Serial.print("State: ");
-		Serial.println(state);
-		digitalWrite(A4, state);
-		digitalWrite(A5, !state);
+void loop()
+{
+	railRoadManager();
+}
+
+
+bool state; // just a value for toggling LEDs
+unsigned long blinkingDuration;
+/*
+Blinks the LEDs in set interval
+*/
+void railRoadBlink()
+{
+	if (blinkingDuration == 0) blinkingDuration = millis();
+	
+	unsigned long d = millis() - blinkingDuration;
+	if (d >= LIGHTS_INTERVAL)
+	{		
+		manageLights(false, state);		
 		state = !state;
-		duration = 0;
+		blinkingDuration = 0;
 	}
 }
 
-bool isOn;
-unsigned long semafor;
-void loop() {
-
-	Serial.print("Is on ");
-	Serial.println(isOn);
-	unsigned long d = millis() - semafor;
-	if (isOn && d <= 10000)
+/*
+Determines if and how long the railroad lights blinks.
+Reads value from IR sensor and manages time for the lamps
+*/
+void railRoadManager()
+{
+	unsigned long d = millis() - railRoadDuration;
+	if (areLightsOn && d <= RAILROAD_DURATION)
 	{
-		trafficLamp();
+		// should still blinking, the duration is less than the set timeout
+		railRoadBlink();
+		return; 
+	}
+
+	// check if the sensor analog value is less than the set threshold
+	// if so, start blinking, if not switch the lamps off 
+	//(NOTE: if the time hasn't timed out yet, the function is exited above)
+	areLightsOn = false;
+	if (analogRead(irSensor1) < IR1_THRESHOLD)
+	{
+		areLightsOn = true;
+		railRoadDuration = millis();
+		railRoadBlink();
+	}
+	else
+	{
+		railRoadDuration = 0;
+		manageLights(true, false);
+	}
+}
+
+// Changes the values for the railroad LEDs
+void manageLights(bool isOff, bool ledState)
+{
+	if (isOff)
+	{
+		digitalWrite(railRoadLED1, LOW);
+		digitalWrite(railRoadLED2, LOW);
 		return;
 	}
-	else
-	{
-		Serial.println(d);
-		isOn = false;
-	}
 
-	int v = analogRead(A0);
-	if (v < 150)
-	{
-		isOn = true;
-		semafor = millis();
-		trafficLamp();
-	}
-	else
-	{
-		semafor = 0;
-		digitalWrite(A4, LOW);
-		digitalWrite(A5, LOW);
-	}
+	digitalWrite(railRoadLED1, ledState);
+	digitalWrite(railRoadLED2, !ledState);
+
 }
