@@ -6,17 +6,8 @@ March 2017 - Added railroads lights functionality without delay (after experimen
 
 */
 
-#include <MFRC522.h>
-#include <SPI.h>
-
 int irSensor1 = A0;
 const int IR1_THRESHOLD = 150;
-
-//  ------ RFID settings ------ 
-#define SDA_PIN 10
-#define RST_PIN 9
-MFRC522 rfid(SDA_PIN, RST_PIN);
-//  ------ RFID settings ------ 
 
 //  ------ RailRoad settings ------
 const int RAILROAD_DURATION = 10000; // 10 sec
@@ -30,8 +21,6 @@ bool areLightsOn;
 void setup()
 {
 	Serial.begin(9600);	
-	SPI.begin();
-	rfid.PCD_Init();
 	pinMode(railRoadLED1, OUTPUT); 
 	pinMode(railRoadLED2, OUTPUT); 
 	pinMode(irSensor1, INPUT);		
@@ -40,7 +29,6 @@ void setup()
 void loop()
 {
 	railRoadManager();
-	rfidManager();
 }
 
 
