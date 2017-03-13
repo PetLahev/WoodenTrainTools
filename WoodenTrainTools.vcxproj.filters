@@ -16,8 +16,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="WoodenTrainTools.ino" />
-    <None Include="rfid_funcs.ino" />
-    <None Include="ledmatrix_funcs.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.WoodenTrainTools.vsarduino.h">

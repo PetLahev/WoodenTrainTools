@@ -12,7 +12,6 @@
 #define _VSARDUINO_H_
 #define __AVR_ATmega328p__
 #define __AVR_ATmega328P__
-#define _VMDEBUG 1
 #define F_CPU 16000000L
 #define ARDUINO 10801
 #define ARDUINO_AVR_UNO
@@ -68,6 +67,6 @@ extern "C" void __cxa_pure_virtual() {;}
 #undef PSTR
 #define PSTR(string_literal) ((const PROGMEM char *)(string_literal))
 #include "WoodenTrainTools.ino"
-#include "ledmatrix_funcs.ino"
-#include "rfid_funcs.ino"
+#include "Rifid_funcs.ino"
+#include "T11_RFID_Tutorial_Sketch.ino"
 #endif
