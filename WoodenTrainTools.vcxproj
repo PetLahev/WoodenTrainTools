@@ -51,7 +51,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\libraries\rfid-master;$(ProjectDir)..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src;$(ProjectDir)..\..\..\..\..\..\Program Files (x86)\Arduino\libraries;$(ProjectDir)..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;$(ProjectDir)..\..\libraries;$(ProjectDir)..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard;$(ProjectDir)..\WoodenTrainTools;$(ProjectDir)..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\avr\include\;$(ProjectDir)..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\avr\include\avr\;$(ProjectDir)..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\avr\;$(ProjectDir)..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ProjectDir)__vm\.WoodenTrainTools.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
-      <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;F_CPU=16000000L;ARDUINO=10801;ARDUINO_AVR_UNO;ARDUINO_ARCH_AVR;__cplusplus=201103L;GCC_VERSION=40902;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=10801;ARDUINO_AVR_UNO;ARDUINO_ARCH_AVR;__cplusplus=201103L;GCC_VERSION=40902;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -75,6 +75,9 @@
     <ProjectCapability Include="VisualMicro" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Rifid_funcs.ino">
+      <FileType>CppCode</FileType>
+    </None>
     <None Include="WoodenTrainTools.ino">
       <FileType>CppCode</FileType>
     </None>

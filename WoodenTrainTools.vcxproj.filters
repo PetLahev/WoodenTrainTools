@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="WoodenTrainTools.ino" />
+    <None Include="Rifid_funcs.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.WoodenTrainTools.vsarduino.h">
