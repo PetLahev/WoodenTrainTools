@@ -6,7 +6,7 @@ int trains[2][4] = {
 };
 
 // Textual representation of tags TODO: Ideally this will be somehow written on the card
-String trainsDescription[] = { "Train 1", "Train 2" };
+String trainsDescription[] = { "Train 1 ", "Train 2 " }; 
 
 /*
 Responsible for managing the RFID reader
@@ -24,6 +24,7 @@ void rfidManager()
 	if (isRecognized(trainIndex))
 	{		
 		Serial.println(trainsDescription[trainIndex]);
+		display(trainsDescription[trainIndex]);
 	}
 	else
 	{

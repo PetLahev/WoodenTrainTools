@@ -68,5 +68,7 @@ extern "C" void __cxa_pure_virtual() {;}
 #undef PSTR
 #define PSTR(string_literal) ((const PROGMEM char *)(string_literal))
 #include "WoodenTrainTools.ino"
+#include "LedMatrix_funcs.ino"
 #include "Rifid_funcs.ino"
+#include "T11_RFID_Tutorial_Sketch.ino"
 #endif
