@@ -78,6 +78,9 @@
     <None Include="LedMatrix_funcs.ino">
       <FileType>CppCode</FileType>
     </None>
+    <None Include="RailRoad_funcs.ino">
+      <FileType>CppCode</FileType>
+    </None>
     <None Include="Rifid_funcs.ino">
       <FileType>CppCode</FileType>
     </None>
